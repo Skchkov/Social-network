@@ -6,28 +6,40 @@ import Post from "./Post/Post";
 
 type PropsType = {
   posts: Array<PostType>;
+  newPostText: string;
+  updateNewPostText: (newText: any) => void;
+  addPost: (newPostText: string | null) => void;
 };
 
 const MyPosts = (props: PropsType) => {
-  // let posts = [
-  //   { id: 1, message: "Hi, how are you?", likesCount: 12 },
-  //   { id: 2, message: "Love Death and Robots", likesCount: 41 },
-  //   { id: 3, message: "Dead line", likesCount: 41 },
-  //   { id: 4, message: "Cream-soda", likesCount: 41 },
-  // ];
-
   let postsElements = props.posts.map((p: PostType) => (
     <Post message={p.message} likeCounter={p.likesCount} />
   ));
+
+  let newPostElement = React.createRef<HTMLTextAreaElement>();
+
+  let addPost = () => {
+    let text = newPostElement.current && newPostElement.current.value;
+    props.addPost(text);
+  };
+
+  let onPostChange = () => {
+    let text = newPostElement.current && newPostElement.current.value; //   newPostElement.current?.value
+    props.updateNewPostText(text);
+  };
 
   return (
     <div className={s.postsBlock}>
       <h3>My posts</h3>
       <div>
-        <textarea></textarea>
+        <textarea
+          onChange={onPostChange}
+          ref={newPostElement}
+          value={props.newPostText}
+        />
       </div>
       <div>
-        <button>Add post</button>
+        <button onClick={addPost}>Add post</button>
       </div>
       <div>New posts</div>
       <div className={s.posts}>{postsElements}</div>

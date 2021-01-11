@@ -6,9 +6,12 @@ import Header from "./components/Header/Header";
 import NavBar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import { RootStateType } from "./redux/state";
+import { addPost } from "./redux/state";
 
 type PropsType = {
   state: RootStateType;
+  addPost: (message: string | null) => void;
+  updateNewPostText: (newText: string) => void;
 };
 
 const App = (props: PropsType) => {
@@ -24,7 +27,13 @@ const App = (props: PropsType) => {
           />
           <Route
             path="/profile"
-            render={() => <Profile state={props.state.profilePage} />}
+            render={() => (
+              <Profile
+                profilePage={props.state.profilePage}
+                addPost={props.addPost}
+                updateNewPostText={props.updateNewPostText}
+              />
+            )}
           />
         </div>
       </div>

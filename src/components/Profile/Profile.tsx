@@ -5,14 +5,21 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 type PropsType = {
-  state: ProfilePageType;
+  profilePage: ProfilePageType;
+  addPost: (newPostText: string | null) => void;
+  updateNewPostText: (newText: string) => void;
 };
 
 const Profile = (props: PropsType) => {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts posts={props.state.posts} />
+      <MyPosts
+        posts={props.profilePage.posts}
+        newPostText={props.profilePage.newPostText}
+        updateNewPostText={props.updateNewPostText}
+        addPost={props.addPost}
+      />
     </div>
   );
 };
