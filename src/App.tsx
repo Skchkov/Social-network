@@ -5,10 +5,11 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
 import NavBar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import { ActionsTypes, RootStateType } from "./redux/state";
+import { ActionsTypes, RootStateType, StoreType } from "./redux/state";
 
 type PropsType = {
   state: RootStateType;
+  store: StoreType;
   dispatch: (action: ActionsTypes) => void;
 };
 
@@ -21,7 +22,9 @@ const App = (props: PropsType) => {
         <div className="app-wrapper-content">
           <Route
             path="/dialogs"
-            render={() => <Dialogs state={props.state.dialogsPage} />}
+            render={() => (
+              <Dialogs store={props.store} state={props.state.dialogsPage} />
+            )}
           />
           <Route
             path="/profile"
