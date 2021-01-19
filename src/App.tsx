@@ -6,7 +6,6 @@ import Header from "./components/Header/Header";
 import NavBar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import { RootStateType } from "./redux/state";
-import { addPost } from "./redux/state";
 
 type PropsType = {
   state: RootStateType;
