@@ -1,6 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
-import { ActionsTypes, PostType } from "../../../redux/state";
+import {
+  ActionsTypes,
+  addPostActionCreator,
+  PostType,
+  updateNewPostTextActionCreator,
+} from "../../../redux/state";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
@@ -19,12 +24,13 @@ const MyPosts = (props: PropsType) => {
 
   let addPost = () => {
     // let text = newPostElement.current && newPostElement.current.value;
-    props.dispatch({ type: "ADD-POST", newPostText: "string" });
+    props.dispatch(addPostActionCreator(props.newPostText));
   };
 
   let onPostChange = () => {
     let text = newPostElement.current ? newPostElement.current.value : ""; //   newPostElement.current?.value
-    props.dispatch({ type: "UPDATE-NEW-POST-TEXT", newText: text });
+    let action = updateNewPostTextActionCreator(text);
+    props.dispatch(action);
   };
 
   return (

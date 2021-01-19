@@ -1,3 +1,5 @@
+const UPDATE = "UPDATE-NEW-POST-TEXT";
+const ADD_POST = "ADD-POST";
 export type StoreType = {
   _state: RootStateType;
   getState: () => RootStateType;
@@ -75,6 +77,24 @@ let store: StoreType = {
       this._callSubscriber(this._state);
     }
   },
+};
+
+export const addPostActionCreator = (
+  newPostText: string
+): AddPostActionType => {
+  return {
+    type: ADD_POST,
+    newPostText: newPostText,
+  };
+};
+
+export const updateNewPostTextActionCreator = (
+  newText: string
+): UpdateNewPostTextActionType => {
+  return {
+    type: UPDATE,
+    newText: newText,
+  };
 };
 
 export type MessageType = {
