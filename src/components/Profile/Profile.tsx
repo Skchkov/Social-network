@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
-import { ActionsTypes, ProfilePageType } from "../../redux/state";
+import { ActionsTypes, ProfilePageType } from "../../redux/store";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 

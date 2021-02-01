@@ -5,7 +5,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
 import NavBar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import { ActionsTypes, RootStateType, StoreType } from "./redux/state";
+import { ActionsTypes, RootStateType, StoreType } from "./redux/store";
 
 type PropsType = {
   state: RootStateType;

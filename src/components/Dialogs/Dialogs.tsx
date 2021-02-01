@@ -6,7 +6,7 @@ import {
   sendMessageCreator,
   StoreType,
   updateNewMessageBodyCreator,
-} from "../../redux/state";
+} from "../../redux/dialogsReducer";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
