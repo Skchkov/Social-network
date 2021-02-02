@@ -1,37 +1,70 @@
-import React from "react";
-
 const SEND_MESSAGE = "SEND-MESSAGE";
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
+const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY";
 
-const dialogsReducer = (state, action) => {
+export type DialogPageType = {
+  dialogs: Array<DialogType>;
+  messages: Array<MessageType>;
+  newMessageBody: string;
+};
+
+export type MessageType = {
+  id: number;
+  message: string;
+};
+
+export type DialogType = {
+  id: number;
+  name: string;
+};
+
+let initialState = {
+  dialogs: [
+    { id: 1, name: "Solaris" },
+    { id: 2, name: "Survival" },
+    { id: 3, name: "Xerlol" },
+    { id: 4, name: "Kek" },
+    { id: 5, name: "Kanonirni4eg" },
+    { id: 6, name: "Baldej" },
+  ],
+  messages: [
+    { id: 1, message: "Hi boys" },
+    { id: 2, message: 'Do you want some "games"?' },
+    { id: 3, message: "Let's do this" },
+    { id: 4, message: "Let's do this" },
+    { id: 5, message: "Let's do this" },
+  ],
+  newMessageBody: "",
+};
+
+const dialogsReducer = (
+  state: DialogPageType = initialState,
+  action: ActionsTypes
+) => {
   switch (action.type) {
-    case UPDATE_NEW_MESSAGE_BODY:
-      state.dialogsPage.newMessageBody = action.body;
-      return state;
-    case SEND_MESSAGE:
+    case UPDATE_NEW_MESSAGE_BODY: {
+      return { ...state, newMessageBody: action.body };
+    }
+
+    case SEND_MESSAGE: {
       let body = state.newMessageBody;
       state.newMessageBody = "";
       state.messages.push({ id: 6, message: body });
       return state;
+    }
     default:
       return state;
   }
 };
 
-export const sendMessageCreator = (newMessageBody: string): SendMessage => {
-  return {
-    type: SEND_MESSAGE,
-    newMessageBody: newMessageBody,
-  };
-};
+export type ActionsTypes = UpdateNewPostTextActionType | SendMessageActionType;
 
-export const updateNewMessageBodyCreator = (
-  body: string
-): UpdateNewMessageBody => {
-  return {
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: body,
-  };
-};
+type SendMessageActionType = ReturnType<typeof sendMessageCreator>;
+type UpdateNewPostTextActionType = ReturnType<
+  typeof updateNewMessageBodyCreator
+>;
+
+export const updateNewMessageBodyCreator = (body: string) =>
+  ({ type: UPDATE_NEW_MESSAGE_BODY, body: body } as const);
+export const sendMessageCreator = () => ({ type: SEND_MESSAGE } as const);
 
 export default dialogsReducer;

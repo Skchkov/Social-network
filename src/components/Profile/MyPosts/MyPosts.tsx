@@ -1,18 +1,14 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
-import {
-  ActionsTypes,
-  addPostActionCreator,
-  PostType,
-  updateNewPostTextActionCreator,
-} from "../../../redux/profileReducer";
+import { PostType } from "../../../redux/profileReducer";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 type PropsType = {
   posts: Array<PostType>;
   newPostText: string;
-  dispatch: (action: ActionsTypes) => void;
+  updateNewPostText: (text: string | undefined) => void;
+  addPost: () => void;
 };
 
 const MyPosts = (props: PropsType) => {
@@ -22,15 +18,13 @@ const MyPosts = (props: PropsType) => {
 
   let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-  let addPost = () => {
-    // let text = newPostElement.current && newPostElement.current.value;
-    props.dispatch(addPostActionCreator(props.newPostText));
+  let onAddPost = () => {
+    props.addPost();
   };
 
   let onPostChange = () => {
-    let text = newPostElement.current ? newPostElement.current.value : ""; //   newPostElement.current?.value
-    let action = updateNewPostTextActionCreator(text);
-    props.dispatch(action);
+    let text = newPostElement.current?.value; //   newPostElement.current?.value
+    props.updateNewPostText(text);
   };
 
   return (
@@ -44,7 +38,7 @@ const MyPosts = (props: PropsType) => {
         />
       </div>
       <div>
-        <button onClick={addPost}>Add post</button>
+        <button onClick={onAddPost}>Add post</button>
       </div>
       <div>New posts</div>
       <div className={s.posts}>{postsElements}</div>
