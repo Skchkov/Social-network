@@ -4,16 +4,19 @@ import styles from "./users.module.css";
 import userPhoto from "./../../assets/images/images.png";
 
 let Users = (props: any) => {
-  if (props.users.length === 0) {
-    axios.default
-      .get("https://social-network.samuraijs.com/api/1.0/users")
-      .then((response: any) => {
-        props.seUsers(response.data.items);
-      });
-  }
+  let getUsers = () => {
+    if (props.users.length === 0) {
+      axios.default
+        .get("https://social-network.samuraijs.com/api/1.0/users")
+        .then((response: any) => {
+          props.seUsers(response.data.items);
+        });
+    }
+  };
 
   return (
     <div>
+      <button onClick={getUsers}> Get Users</button>
       {props.users.map((u: any) => (
         <div key={u.id}>
           <span>
