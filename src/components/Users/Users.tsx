@@ -1,37 +1,15 @@
+import * as axios from "axios";
 import React from "react";
 import styles from "./users.module.css";
+import userPhoto from "./../../assets/images/images.png";
 
 let Users = (props: any) => {
   if (props.users.length === 0) {
-    props.seUsers([
-      {
-        id: 1,
-        photoUrl:
-          "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
-        followed: false,
-        fullName: "Nikita",
-        status: "Dead inside",
-        location: { city: "Minsk", country: "Belarus" },
-      },
-      {
-        id: 2,
-        photoUrl:
-          "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
-        followed: true,
-        fullName: "Misha",
-        status: "ez for me",
-        location: { city: "Moscow", country: "Russia" },
-      },
-      {
-        id: 3,
-        photoUrl:
-          "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
-        followed: false,
-        fullName: "Andrew",
-        status: "Your best choice",
-        location: { city: "Kiev", country: "Ukraine" },
-      },
-    ]);
+    axios.default
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((response: any) => {
+        props.seUsers(response.data.items);
+      });
   }
 
   return (
@@ -40,7 +18,11 @@ let Users = (props: any) => {
         <div key={u.id}>
           <span>
             <div>
-              <img src={u.photoUrl} className={styles.usersPhoto} alt="asd" />
+              <img
+                src={u.photos.small !== null ? u.photos.small : userPhoto}
+                className={styles.usersPhoto}
+                alt="asd"
+              />
             </div>
             <div>
               {u.followed ? (
@@ -64,12 +46,12 @@ let Users = (props: any) => {
           </span>
           <span>
             <span>
-              <div>{u.fullName}</div>
+              <div>{u.name}</div>
               <div>{u.status}</div>
             </span>
             <span>
-              <div>{u.location.country}</div>
-              <div>{u.location.city}</div>
+              <div>{"u.location.country"}</div>
+              <div>{"u.location.city"}</div>
             </span>
           </span>
         </div>

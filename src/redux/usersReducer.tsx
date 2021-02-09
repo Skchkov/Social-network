@@ -21,35 +21,7 @@ export type UsersPageType = {
 };
 
 let initialState = {
-  users: [
-    {
-      id: 1,
-      photoUrl:
-        "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
-      followed: false,
-      fullName: "Nikita",
-      status: "Dead inside",
-      location: { city: "Minsk", country: "Belarus" },
-    },
-    {
-      id: 2,
-      photoUrl:
-        "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
-      followed: true,
-      fullName: "Misha",
-      status: "ez for me",
-      location: { city: "Moscow", country: "Russia" },
-    },
-    {
-      id: 3,
-      photoUrl:
-        "https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg",
-      followed: false,
-      fullName: "Andrew",
-      status: "Your best choice",
-      location: { city: "Kiev", country: "Ukraine" },
-    },
-  ],
+  users: [],
 };
 
 export type ActionsTypes =
