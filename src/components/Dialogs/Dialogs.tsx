@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import {
   DialogPageType,
   DialogType,
@@ -29,8 +29,8 @@ const Dialogs = (props: PropsType) => {
   let onSendMessageClick = () => {
     props.sendMessage();
   };
-  let onNewMessageChange = (e: any) => {
-    let body = e.target.value;
+  let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    let body = e.currentTarget.value;
     props.updateNewMessageBody(body);
   };
   return (
