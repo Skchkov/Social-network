@@ -17,8 +17,8 @@ const mapStateToProps = (state: RootStateType) => {
 
 const mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
   return {
-    updateNewPostText: (text: string | undefined) => {
-      let action = updateNewPostTextActionCreator(text);
+    updateNewPostText: (NewText: string | undefined) => {
+      let action = updateNewPostTextActionCreator(NewText);
       dispatch(action);
     },
     addPost: () => {

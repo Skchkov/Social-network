@@ -3,10 +3,14 @@ import React from "react";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+type PropsType = {
+  profile: any;
+};
+
+const Profile = (props: PropsType) => {
   return (
     <div>
-      <ProfileInfo />
+      <ProfileInfo profile={props.profile} />
       <MyPostsContainer />
     </div>
   );

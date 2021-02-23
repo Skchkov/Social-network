@@ -1,5 +1,6 @@
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const ADD_POST = "ADD-POST";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 export type PostType = {
   id: number;
@@ -10,9 +11,10 @@ export type PostType = {
 export type ProfilePageType = {
   posts: Array<PostType>;
   newPostText: string;
+  profile: any;
 };
 
-let initialState = {
+let initialState: ProfilePageType = {
   posts: [
     { id: 1, message: "Hi, how are you?", likesCount: 12 },
     { id: 2, message: "Love Death and Robots", likesCount: 41 },
@@ -20,12 +22,13 @@ let initialState = {
     { id: 4, message: "Cream-soda", likesCount: 41 },
   ],
   newPostText: "",
+  profile: {},
 };
 
 const profileReducer = (
-  state: ProfilePageType = initialState,
+  state = initialState,
   action: ActionsTypes
-) => {
+): ProfilePageType => {
   switch (action.type) {
     case ADD_POST: {
       let newPost: PostType = {
@@ -42,12 +45,18 @@ const profileReducer = (
     case UPDATE_NEW_POST_TEXT: {
       return { ...state, newPostText: action.newText };
     }
+    case SET_USER_PROFILE: {
+      return { ...state, profile: action.profile };
+    }
     default:
       return state;
   }
 };
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType;
+export type ActionsTypes =
+  | AddPostActionType
+  | UpdateNewPostTextActionType
+  | SetUserProfileActionType;
 
 // type AddPostActionType = {
 //   type: "ADD-POST";
@@ -63,12 +72,20 @@ type AddPostActionType = ReturnType<typeof addPostActionCreator>;
 type UpdateNewPostTextActionType = ReturnType<
   typeof updateNewPostTextActionCreator
 >;
+export type SetUserProfileActionType = {
+  type: typeof SET_USER_PROFILE;
+  profile: any;
+};
 
 export const addPostActionCreator = () => ({ type: ADD_POST } as const);
 
 export const updateNewPostTextActionCreator = (newText: any) =>
   ({
     type: UPDATE_NEW_POST_TEXT,
-    newText: newText,
+    newText,
   } as const);
+
+export const setUserProfileAC = (profile: any): SetUserProfileActionType =>
+  ({ type: SET_USER_PROFILE, profile } as const);
+
 export default profileReducer;
