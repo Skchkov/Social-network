@@ -1,3 +1,5 @@
+import { authAPI } from "../api/api";
+
 const SET_USER_DATA = "SET_USER_DATA";
 
 export type LocationType = {
@@ -48,5 +50,14 @@ const authReducer = (state: AuthType = initialState, action: ActionsTypes) => {
 
 export const setAuthUserData = (userId: any, email: any, login: any) =>
   ({ type: SET_USER_DATA, data: { userId, email, login } } as const);
+
+export const getAuthUserData = () => (dispatch: any) => {
+  authAPI.me().then((response: any) => {
+    if (response.data.resultCode === 0) {
+      let { id, email, login } = response.data.data;
+      dispatch(setAuthUserData(id, email, login));
+    }
+  });
+};
 
 export default authReducer;
