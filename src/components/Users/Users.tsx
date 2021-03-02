@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom";
 import { UserType } from "../../redux/usersReducer";
 import styles from "./users.module.css";
 import userPhoto from "../../assets/images/images.png";
-import axios from "axios";
 
 type PropsType = {
   users: Array<UserType>;
   follow: (userId: number) => void;
   unfollow: (userId: number) => void;
   onPageChanged: (pageNumber: number) => void;
+  followingInProgress: any;
   totalUsersCount: number;
   pageSize: number;
   currentPage: number;
@@ -54,45 +54,22 @@ let Users = (props: PropsType) => {
             <div>
               {u.followed ? (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id: any) => id === u.id
+                  )}
                   onClick={() => {
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "03075090-523f-478c-ac87-b9731649dbe7",
-                          },
-                        }
-                      )
-                      .then((response: any) => {
-                        if (response.data.resultCode === 0) {
-                          props.unfollow(u.id);
-                        }
-                      });
+                    props.unfollow(u.id);
                   }}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id: any) => id === u.id
+                  )}
                   onClick={() => {
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                        {},
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "03075090-523f-478c-ac87-b9731649dbe7",
-                          },
-                        }
-                      )
-                      .then((response: any) => {
-                        if (response.data.resultCode === 0) {
-                          props.follow(u.id);
-                        }
-                      });
+                    props.follow(u.id);
                   }}
                 >
                   Follow
